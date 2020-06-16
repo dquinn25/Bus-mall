@@ -14,7 +14,7 @@
 
 var imageCollection = [];
 var totalClicks = 0;
-var maxClicks = 5;
+var maxClicks = 7;
 
 function DisplayProducts(imageSource, caption){
     this.clicked = 0;
