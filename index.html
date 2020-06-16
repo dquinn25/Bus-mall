@@ -10,23 +10,30 @@
 <body>
     <h1>Please pick a product</h1>
     <section id="productImages">
-        <div>
+        <div class="column">
             <img id="left-image" src="breakfast.jpg" alt="breakfast" >
             <p id="left-text">Breakfast Tool</p> 
         </div>
-        <p>or</p>
-        <figure>
-            <img id="middle-image" src="shark.jpg" alt="shark" >
-            <figcaption id="middle-text">Shark Sleeping Bag</figcaption>
-        </figure>
-        <figure>
-            <img id="right-image" src="boots.jpg" alt="boots" >
-            <figcaption id="right-text">boots</figcaption>
-        </figure>
-    </section>
+            <p>or</p>
+            <div class="column">
+            <figure>
+                <img id="middle-image" src="shark.jpg" alt="shark" >
+                <figcaption id="middle-text">Shark Sleeping Bag</figcaption>
+                </div>
+            </figure>
+            <div class="column">
+            <figure>
+                <img id="right-image" src="boots.jpg" alt="boots" >
+                <figcaption id="right-text">boots</figcaption>
+            </figure>
+        </div>
+        </section>
     <section>
         <h2>Your Results</h2>
     </section>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <table id="product-results"></table>
     
       <script src="app.js"></script>
