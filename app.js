@@ -52,7 +52,9 @@ function DisplayProducts(imageSource, caption){
 
 
     
-    
+    var translateProductsToString = localStorage.getItem('storedProducts');
+
+    var productsFromStorage = JSON.parse(translateProductsToString);
     // Set up the event listener
     // target something
     var productImageSection = document.getElementById('productImages');
