@@ -55,6 +55,10 @@ function DisplayProducts(imageSource, caption){
     var translateProductsToString = localStorage.getItem('storedProducts');
 
     var productsFromStorage = JSON.parse(translateProductsToString);
+
+    if(productsFromStorage){
+      imageCollection = productsFromStorage;
+    }
     // Set up the event listener
     // target something
     var productImageSection = document.getElementById('productImages');
@@ -73,6 +77,10 @@ function DisplayProducts(imageSource, caption){
         productImageSection.removeEventListener('click', trackAndRerack);
         createChart();
 
+        var stringyProductSelection = JSON.stringify(imageCollection);
+    console.log('stringy array', translateProductsToString);
+    // 2. save it
+    localStorage.setItem('product images', stringyProductSelection);
         //if statement is not compiling to true so click proprty is not being updated
         // tableRender();
         //  renderTheChart();
@@ -324,3 +332,7 @@ var ctx = document.getElementById('myChart').getContext('2d');
 //   }
 // })
 // }
+//mission 
+//brainstorm with classmates on how to implement local storage on to this app
+//find away to get top result to render
+//
