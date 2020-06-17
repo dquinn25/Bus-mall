@@ -28,6 +28,10 @@
   * {
     box-sizing: border-box;
   }
+
+  td {
+      padding: 10px;
+  }
   
   /* section:first-of-type {
     position: relative;

@@ -14,8 +14,10 @@
 
 var imageCollection = [];
 var totalClicks = 0;
-var maxClicks = 25; 
+var maxClicks = 10; 
 var verifyImage = [];
+// var income = document.getElementById("income").getContext("2d");
+// new Chart(income).Bar(barData);
 
 function DisplayProducts(imageSource, caption){
     this.clicked = 0;
@@ -67,7 +69,8 @@ function DisplayProducts(imageSource, caption){
         //IMPORTANT - how to stop an event handler
         productImageSection.removeEventListener('click', trackAndRerack);
         //if statement is not compiling to true so click proprty is not being updated
-        tableRender();
+        // tableRender();
+        //  renderTheChart();
     }
 var targetSrc = event.target.getAttribute('src');
     for(var i = 0; i <  imageCollection.length; i++){
@@ -144,7 +147,7 @@ function tableRender(){
 // seattleStore.prototype.renderToPage = renderToPage;
 
 
-
+createHeader();
 for(var i = 0; i < this.imageCollection.length; i++){
     var tableCell = document.createElement('td');
     var tableRow = document.createElement('tr');
@@ -154,28 +157,198 @@ for(var i = 0; i < this.imageCollection.length; i++){
     tableCell = document.createElement('td');
     tableCell.textContent = this.imageCollection[i].clicked;
     tableRow.appendChild(tableCell);
+    tableCell = document.createElement('td');
+    tableCell.textContent = this.imageCollection[i].shown;
+    tableRow.appendChild(tableCell);
     table.appendChild(tableRow);
 }
   }
  
+  function createHeader(){
+    var header = document.getElementById('productImagese');
+
+    var tableRow = document.createElement('tr');
+
+    var tableCell = document.createElement('td');
+
+    tableCell.textContent = 'Times clicked';
+
+    tableRow.appendChild(tableCell);
+
+    for(var i = 0; i < imageCollection.length; i ++){
+        tableCell = document.createElement('td');
+        tableCell.textContent = 'Times seen';
+        tableRow.appendChild(tableCell);
+    }
+    // header.appendChild(tableRow);
+}
 
 
 
-//   var ctx = document.getElementById('myChart').getContext('2d');
-// var chart = new Chart(ctx, {
+
+// function renderTheChart(){
+
+//     var productNames =[];
+//   for(var i = 0; i < imageCollection.length; i++){
+//     productNames.push(imageCollection[i].imageCaption);
+//   }
+
+// var productClicks = [];
+//   for(i = 0; i < imageCollection.length; i++){
+//     productClicks.push(imageCollection[i].clicked);
+//   }
+
+
+
+// var barData = {
+// 	labels : [],
+// 	datasets : [
+// 		{
+// 			fillColor : "#48A497",
+// 			strokeColor : "#48A4D1",
+// 			data : [456,479,324,569,702,600]
+// 		},
+// 		{
+// 			fillColor : "rgba(73,188,170,0.4)",
+// 			strokeColor : "rgba(72,174,209,0.4)",
+// 			data : [364,504,605,400,345,320]
+//         }
+//     ]
+// }
+// return newChart(income, barData);
+    
+
 //   // The type of chart we want to create
-//   type: 'graph',
+//   type: 'bar',
 
 //   data: {
 //     labels: ['', 'Breakfast', 'Shark', 'Dragon Meat', 'Chtulhu', 'Tauntaun', 'R2-D2', 'Chair', 'Banana', 'Boots', 'Dog Duck', 'Bathroom IPAD', 'Meatball Bubble Gum', 'Pen', 'Pet Sweep', 'Pizza Scissors', 'Kid Sweep', 'Unicorn Meat', 'USB', 'Water Can', 'Wine Glass'],
 //     datasets: [{
-//       label: 'Which product is best',
+//       label: 'Times CLicked',
 //       backgroundColor: 'orange',
 //       borderColor: 'purple',
 //       data: [{y: 0, x: 9, r:300}, {y: 10, x:20, r:300}, {y:5, x:20, r:300}, {y:2, x: 30, r:300}, {y: 20, x: 5, r:300}, {y:30, x:30, r:300}, {y: 45, x: 45, r:300}, {y:50, x:20, r:600}]
-//     }]
+//     }, {
+//         label: ['', 'Breakfast', 'Shark', 'Dragon Meat', 'Chtulhu', 'Tauntaun', 'R2-D2', 'Chair', 'Banana', 'Boots', 'Dog Duck', 'Bathroom IPAD', 'Meatball Bubble Gum', 'Pen', 'Pet Sweep', 'Pizza Scissors', 'Kid Sweep', 'Unicorn Meat', 'USB', 'Water Can', 'Wine Glass'],
+
+var productNames =[];
+  for(var i = 0; i < imageCollection.length; i++){
+    productNames.push(imageCollection[i].imageCaption);
+  }
+
+//mission set
+
+var productClicks = [];
+  for(i = 0; i < imageCollection.length; i++){
+    productClicks.push(imageCollection[i].clicked);
+//
+
+var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: { 
+      labels: productNames,
+      datasets: [{
+        label: productClicks,
+        data: productClicks,
+        backgroundColor: [
+          'rgba(' + 255 + ', ' +99 + ', ' + 132 +', 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)'
+        ],
+        borderWidth: 1
+      },
+      {
+        label: 'product clicks',
+        data: productClicks,
+        backgroundColor: [
+          'rgba(' + 255 + ', ' + 99 + ', ' + 132 + ', 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)'
+        ],
+        borderWidth: 1,
+        type: 'line',
+      },
+      {
+        label: 'product clicks',
+        data: productClicks,
+        backgroundColor: [
+          'rgba(' + 255 + ', ' + 99 + ', ' + 132 + ', 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)'
+        ],
+        borderWidth: 1,
+        type: 'bar',
+      }]
+    },
+    options: {
+      // https://stackoverflow.com/questions/26257268/click-events-on-pie-charts-in-chart-js
+      onClick: function (event){
+        console.log(event);
+        console.log(myChart.getElementsAtEvent(event));
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
+//         backgroundColor: 'blue',
+//         borderColor: 'purple',
+//         data: [{y: 0, x: 9, r:300}, {y: 10, x:20, r:300}, {y:5, x:20, r:300}, {y:2, x: 30, r:300}, {y: 20, x: 5, r:300}, {y:30, x:30, r:300}, {y: 45, x: 45, r:300}, {y:50, x:20, r:600}]
+//       }]
 //   },
-//   // Configuration options go here
+// //   Configuration options go here
 //   options: {
 //     title: {
 //       display: true,
@@ -190,4 +363,5 @@ for(var i = 0; i < this.imageCollection.length; i++){
 //       }
 //     }
 //   }
-// });
+// })
+// }
