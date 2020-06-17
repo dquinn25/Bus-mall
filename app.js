@@ -14,7 +14,7 @@
 
 var imageCollection = [];
 var totalClicks = 0;
-var maxClicks = 10; 
+var maxClicks = 25; 
 var verifyImage = [];
 // var income = document.getElementById("income").getContext("2d");
 // new Chart(income).Bar(barData);
@@ -61,13 +61,16 @@ function DisplayProducts(imageSource, caption){
     productImageSection.addEventListener('click', trackAndRerack);
     
     function trackAndRerack(event){
-        //     if(event.target.section === 'productImages'){
-            //     //if section does not work use Id
-            //     totalClicks++;
-    //     }
+      //     if(event.target.section === 'productImages'){
+        //     //if section does not work use Id
+        //     totalClicks++;
+        //     }
+        totalClicks++;
     if(totalClicks === maxClicks){
         //IMPORTANT - how to stop an event handler
         productImageSection.removeEventListener('click', trackAndRerack);
+        createChart();
+
         //if statement is not compiling to true so click proprty is not being updated
         // tableRender();
         //  renderTheChart();
@@ -77,14 +80,11 @@ var targetSrc = event.target.getAttribute('src');
         console.log(targetSrc, imageCollection[i].imageSrc)
         //this, left side, (imageCollection[i].imageSource)
       if (imageCollection[i].imageSrc === targetSrc) {
-          console.log('**********', imageCollection[i])
           imageCollection[i].clicked++;
         }
     }
     
     
-    totalClicks++;
-    console.log(totalClicks)
     rerenderSomeRandomImages();
     
     
@@ -200,57 +200,36 @@ for(var i = 0; i < this.imageCollection.length; i++){
 
 
 
-// var barData = {
-// 	labels : [],
-// 	datasets : [
-// 		{
-// 			fillColor : "#48A497",
-// 			strokeColor : "#48A4D1",
-// 			data : [456,479,324,569,702,600]
-// 		},
-// 		{
-// 			fillColor : "rgba(73,188,170,0.4)",
-// 			strokeColor : "rgba(72,174,209,0.4)",
-// 			data : [364,504,605,400,345,320]
-//         }
-//     ]
-// }
-// return newChart(income, barData);
-    
-
-//   // The type of chart we want to create
-//   type: 'bar',
-
-//   data: {
-//     labels: ['', 'Breakfast', 'Shark', 'Dragon Meat', 'Chtulhu', 'Tauntaun', 'R2-D2', 'Chair', 'Banana', 'Boots', 'Dog Duck', 'Bathroom IPAD', 'Meatball Bubble Gum', 'Pen', 'Pet Sweep', 'Pizza Scissors', 'Kid Sweep', 'Unicorn Meat', 'USB', 'Water Can', 'Wine Glass'],
-//     datasets: [{
-//       label: 'Times CLicked',
-//       backgroundColor: 'orange',
-//       borderColor: 'purple',
-//       data: [{y: 0, x: 9, r:300}, {y: 10, x:20, r:300}, {y:5, x:20, r:300}, {y:2, x: 30, r:300}, {y: 20, x: 5, r:300}, {y:30, x:30, r:300}, {y: 45, x: 45, r:300}, {y:50, x:20, r:600}]
-//     }, {
-//         label: ['', 'Breakfast', 'Shark', 'Dragon Meat', 'Chtulhu', 'Tauntaun', 'R2-D2', 'Chair', 'Banana', 'Boots', 'Dog Duck', 'Bathroom IPAD', 'Meatball Bubble Gum', 'Pen', 'Pet Sweep', 'Pizza Scissors', 'Kid Sweep', 'Unicorn Meat', 'USB', 'Water Can', 'Wine Glass'],
-
-var productNames =[];
-  for(var i = 0; i < imageCollection.length; i++){
-    productNames.push(imageCollection[i].imageCaption);
-  }
+function chartTotals(){
+DisplayProducts.productNames =[];
+for(var i = 0; i < imageCollection.length; i++){
+  DisplayProducts.productNames.push(imageCollection[i].imageCaption);
+}
 
 //mission set
 
-var productClicks = [];
-  for(i = 0; i < imageCollection.length; i++){
-    productClicks.push(imageCollection[i].clicked);
-//
+DisplayProducts.productsShown = [];
+for(i = 0; i < imageCollection.length; i++){
+  DisplayProducts.productsShown.push(imageCollection[i].shown);
+}
 
+DisplayProducts.productClicks = [];
+for(i = 0; i < imageCollection.length; i++){
+  DisplayProducts.productClicks.push(imageCollection[i].clicked);
+}
+}
+function createChart(){
+  chartTotals();
+console.log('product names', DisplayProducts.productNames)
+console.log('products clicked', DisplayProducts.productClicks)
 var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: { 
-      labels: productNames,
+      labels: DisplayProducts.productNames,
       datasets: [{
-        label: productClicks,
-        data: productClicks,
+        label: 'pic Clicks',
+        data: DisplayProducts.productClicks,
         backgroundColor: [
           'rgba(' + 255 + ', ' +99 + ', ' + 132 +', 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -274,34 +253,8 @@ var ctx = document.getElementById('myChart').getContext('2d');
         borderWidth: 1
       },
       {
-        label: 'product clicks',
-        data: productClicks,
-        backgroundColor: [
-          'rgba(' + 255 + ', ' + 99 + ', ' + 132 + ', 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)'
-        ],
-        borderWidth: 1,
-        type: 'line',
-      },
-      {
-        label: 'product clicks',
-        data: productClicks,
+        label: 'products Shown',
+        data: DisplayProducts.productsShown,
         backgroundColor: [
           'rgba(' + 255 + ', ' + 99 + ', ' + 132 + ', 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -324,14 +277,17 @@ var ctx = document.getElementById('myChart').getContext('2d');
         ],
         borderWidth: 1,
         type: 'bar',
+      },
+      {
+     
       }]
     },
     options: {
       // https://stackoverflow.com/questions/26257268/click-events-on-pie-charts-in-chart-js
-      onClick: function (event){
-        console.log(event);
-        console.log(myChart.getElementsAtEvent(event));
-      },
+      // onClick: function (event){
+      //   console.log(event);
+      //   console.log(myChart.getElementsAtEvent(event));
+      // },
       scales: {
         yAxes: [{
           ticks: {
@@ -342,6 +298,7 @@ var ctx = document.getElementById('myChart').getContext('2d');
     }
   });
 }
+
 
 //         backgroundColor: 'blue',
 //         borderColor: 'purple',
