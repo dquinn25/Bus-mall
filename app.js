@@ -27,26 +27,26 @@ function DisplayProducts(imageSource, caption){
   
     imageCollection.push(this);
 }
-    new DisplayProducts('breakfast.jpg', 'breakfast');
-    new DisplayProducts('shark.jpg', 'Shark');
-    new DisplayProducts('dragon.jpg', 'Dragon Meat');
+    new DisplayProducts('breakfast.jpg', 'breakfast Onthe go(select meals)');
+    new DisplayProducts('shark.jpg', 'What would it be like to be inside a Shark');
+    new DisplayProducts('dragon.jpg', 'Dragon Meat(may cause fire breath)');
     new DisplayProducts('cthulhu.jpg', 'Chtulhu');
-    new DisplayProducts('tauntaun.jpg', 'Tauntaun');
+    new DisplayProducts('tauntaun.jpg', 'Sleep Like Han Solo');
     new DisplayProducts('bag.jpg', 'R2-D2');
-    new DisplayProducts('chair.jpg', 'Chair');
-    new DisplayProducts('banana.jpg', 'Banana');
-    new DisplayProducts('boots.jpg', 'Boots');
-    new DisplayProducts('dog-duck.jpg', 'Dog Duck');
-    new DisplayProducts('bathroom.jpg', 'Bathroom IPAD');
-    new DisplayProducts('bubblegum.jpg', 'Meatball Bubble Gum');
-    new DisplayProducts('pen.jpg', 'Pen');
-    new DisplayProducts('pet-sweep.jpg', 'Pet Sweep');
-    new DisplayProducts('scissors.jpg', 'Pizza Scissors');
-    new DisplayProducts('sweep.png', 'Kid Sweep');
-    new DisplayProducts('unicorn.jpg', 'Unicorn Meat');
-    new DisplayProducts('usb.gif', 'USB');
-    new DisplayProducts('water-can.jpg', 'Water Can');
-    new DisplayProducts('wine-glass.jpg', 'Wine Glass');
+    new DisplayProducts('chair.jpg', 'I would not sit on this');
+    new DisplayProducts('banana.jpg', 'because cutting a bannana is too hard');
+    new DisplayProducts('boots.jpg', 'Boots if you have no toes');
+    new DisplayProducts('dog-duck.jpg', 'Wish you bought a Duck');
+    new DisplayProducts('bathroom.jpg', 'Never stop playing Candy Crush');
+    new DisplayProducts('bubblegum.jpg', 'Meatball Bubble Gum (yum)');
+    new DisplayProducts('pen.jpg', 'Pen Utensil');
+    new DisplayProducts('pet-sweep.jpg', 'Pet Sweep(they make a messs they can clean it up)');
+    new DisplayProducts('scissors.jpg', 'Pizza Scissors(Im sure you have a place to store this)');
+    new DisplayProducts('sweep.png', 'Kid Sweep(they will think its fun)');
+    new DisplayProducts('unicorn.jpg', 'Unicorn Meat(very rare)');
+    new DisplayProducts('usb.gif', 'USB(or is it?)');
+    new DisplayProducts('water-can.jpg', 'Water Can(the gift that keeps on getting re gifted)');
+    new DisplayProducts('wine-glass.jpg', 'Wine Glass(Drink responsibly so dont buy this)');
 
 
 
@@ -72,28 +72,29 @@ function DisplayProducts(imageSource, caption){
         //     totalClicks++;
         //     }
         totalClicks++;
-    if(totalClicks === maxClicks){
-        //IMPORTANT - how to stop an event handler
-        productImageSection.removeEventListener('click', trackAndRerack);
-        createChart();
-
-        var stringyProductSelection = JSON.stringify(imageCollection);
-    console.log('stringy array', translateProductsToString);
-    // 2. save it
-    localStorage.setItem('product images', stringyProductSelection);
-        //if statement is not compiling to true so click proprty is not being updated
-        // tableRender();
-        //  renderTheChart();
-    }
-var targetSrc = event.target.getAttribute('src');
-    for(var i = 0; i <  imageCollection.length; i++){
-        console.log(targetSrc, imageCollection[i].imageSrc)
-        //this, left side, (imageCollection[i].imageSource)
-      if (imageCollection[i].imageSrc === targetSrc) {
-          imageCollection[i].clicked++;
+        if(totalClicks === maxClicks){
+          //IMPORTANT - how to stop an event handler
+          productImageSection.removeEventListener('click', trackAndRerack);
+          createChart();
+          
+          var stringyProductSelection = JSON.stringify(imageCollection);
+          console.log('stringy array', translateProductsToString);
+          // 2. save it
+          localStorage.setItem('product images', stringyProductSelection);
+          //if statement is not compiling to true so click proprty is not being updated
+          // tableRender();
+          //  renderTheChart();
         }
-    }
-    
+        var targetSrc = event.target.getAttribute('src');
+        for(var i = 0; i <  imageCollection.length; i++){
+          console.log(targetSrc, imageCollection[i].imageSrc)
+          //this, left side, (imageCollection[i].imageSource)
+          if (imageCollection[i].imageSrc === targetSrc) {
+            imageCollection[i].clicked++;
+          }
+        }
+        
+        // console.log(Math.max('*****************', ...imageCollection[i].clicked));
     
     rerenderSomeRandomImages();
     
@@ -130,7 +131,7 @@ function rerenderSomeRandomImages(){
     var middleText = document.getElementById('middle-text');
     middleImage.src = imageCollection[secondRandom].imageSrc;
     middleText.textContent = imageCollection[secondRandom].imageCaption;
-  imageCollection[secondRandom].shown++;
+    imageCollection[secondRandom].shown++;
   
   var rightImage = document.getElementById('right-image');
   var rightText = document.getElementById('right-text');
@@ -230,7 +231,7 @@ for(i = 0; i < imageCollection.length; i++){
 }
 function createChart(){
   chartTotals();
-console.log('product names', DisplayProducts.productNames)
+  console.log('product names', DisplayProducts.productNames)
 console.log('products clicked', DisplayProducts.productClicks)
 var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
